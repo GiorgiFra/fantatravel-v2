@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10
+      author: alessandro.fazari
+      changes:
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: "CHINA"
+              - column:
+                  name: description
+                  value: "CHINA_DESC"

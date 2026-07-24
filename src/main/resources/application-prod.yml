@@ -1,0 +1,10 @@
+server:
+  ssl:
+    key-store-type: PKCS12
+    key-store: ${KEY_STORE_PATH:/home/afazari/Personale/fantabet/fantabet.p12}
+    key-store-password: ${KEY_STORE_PWD:46fazza13}
+    key-alias: ${KEY_ALIAS:fantabet}
+    enabled: true
+password:
+  reset:
+    url: https://fantatravel.ovh/fantatravel/app/confirm-reset-password

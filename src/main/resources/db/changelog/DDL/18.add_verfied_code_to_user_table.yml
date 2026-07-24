@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 18
+      author: tuo_nome
+      changes:
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: confirmation_code
+                  type: varchar(6)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: verified
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false

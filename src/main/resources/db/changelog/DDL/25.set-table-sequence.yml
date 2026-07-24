@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 22.8-set-default-id-from-sequence
+      author: alessandro.fazari
+      changes:
+        - sql:
+            sql: |
+              ALTER TABLE travels_rules 
+              ALTER COLUMN id SET DEFAULT nextval('travels_rules_id_seq');
+  - changeSet:
+      id: 22.9-set-default-id-from-sequence
+      author: alessandro.fazari
+      changes:
+        - sql:
+            sql: |
+              ALTER TABLE travels_users
+              ALTER COLUMN id SET DEFAULT nextval('travels_users_id_seq');

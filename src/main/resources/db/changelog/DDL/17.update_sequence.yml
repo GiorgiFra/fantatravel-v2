@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 17
+      author: alessandro.fazari
+      changes:
+        - sql:
+            splitStatements: false
+            stripComments: true
+            sql: |
+              DO $$
+              DECLARE
+                max_category_id bigint;
+                max_destination_id bigint;
+                max_rule_id bigint;
+              BEGIN
+                SELECT COALESCE(MAX(id), 0) INTO max_category_id FROM category;
+                SELECT COALESCE(MAX(id), 0) INTO max_destination_id FROM destination;
+                SELECT COALESCE(MAX(id), 0) INTO max_rule_id FROM rule;
+
+                PERFORM setval('category_id_seq', max_category_id);
+                PERFORM setval('destination_id_seq', max_destination_id);
+                PERFORM setval('rule_id_seq', max_rule_id);
+              END $$;

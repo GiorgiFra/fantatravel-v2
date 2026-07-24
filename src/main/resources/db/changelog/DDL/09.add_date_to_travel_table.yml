@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 12
+      author: alessandro.fazari
+      changes:
+        - addColumn:
+            tableName: travel
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: start_date
+                  type: DATE
+                  constraints:
+                    nullable: true
+        - addColumn:
+            tableName: travel
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: end_date
+                  type: DATE
+                  constraints:
+                    nullable: true

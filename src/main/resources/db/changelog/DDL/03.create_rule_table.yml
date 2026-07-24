@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: alessandro.fazari
+      changes:
+        - createTable:
+            tableName: rule
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: repeatable
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: INTEGER
+                  constraints:
+                    nullable: false

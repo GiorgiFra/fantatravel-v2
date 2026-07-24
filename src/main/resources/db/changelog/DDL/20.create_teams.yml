@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20.create-teams-and-teams-users
+      author: alessandro.fazari
+      changes:
+        - createTable:
+            tableName: team
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_team
+                    nullable: false
+              - column:
+                  name: travel_user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        # Foreign key teams → travels_users
+        - addForeignKeyConstraint:
+            baseTableName: team
+            baseColumnNames: travel_user_id
+            constraintName: fk_teams_traveluser
+            referencedTableName: travels_users
+            referencedColumnNames: id
+            onDelete: CASCADE
+
+        # Tabella di relazione teams_users
+        - createTable:
+            tableName: teams_users
+            columns:
+              - column:
+                  name: team_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: captain
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+        # Foreign keys teams_users → teams e → users
+        - addForeignKeyConstraint:
+            baseTableName: teams_users
+            baseColumnNames: team_id
+            constraintName: fk_teams_users_team
+            referencedTableName: team
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: teams_users
+            baseColumnNames: user_id
+            constraintName: fk_teams_users_user
+            referencedTableName: user
+            referencedColumnNames: id
+            onDelete: CASCADE
+
+        # Unique per evitare duplicati team-user
+        - addUniqueConstraint:
+            tableName: teams_users
+            columnNames: team_id, user_id
+            constraintName: unique_team_user

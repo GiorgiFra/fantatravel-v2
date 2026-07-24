@@ -1,0 +1,3 @@
+password:
+  reset:
+    url: http://localhost:3000/fantatravel/app/confirm-reset-password

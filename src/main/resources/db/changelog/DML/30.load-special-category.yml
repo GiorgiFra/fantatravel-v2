@@ -1,0 +1,95 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250814-2
+      author: fantatravel
+      changes:
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: portable_first_aid
+              - column:
+                  name: description
+                  value: portable_first_aid
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: steel_stomach
+              - column:
+                  name: description
+                  value: steel_stomach
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: the_mover
+              - column:
+                  name: description
+                  value: the_mover
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: extreme_minimalist
+              - column:
+                  name: description
+                  value: extreme_minimalist
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: paparazzo
+              - column:
+                  name: description
+                  value: paparazzo
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: living_meme
+              - column:
+                  name: description
+                  value: living_meme
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: odd_sock
+              - column:
+                  name: description
+                  value: odd_sock
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: dead_battery
+              - column:
+                  name: description
+                  value: dead_battery
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: public_restroom_adventurer
+              - column:
+                  name: description
+                  value: public_restroom_adventurer
+        - insert:
+            tableName: special_category
+            columns:
+              - column:
+                  name: name
+                  value: pro_sleeper
+              - column:
+                  name: description
+                  value: pro_sleeper

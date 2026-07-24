@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 15
+      author: alessandro.fazari
+      changes:
+        - createTable:
+            tableName: destinations_rules
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: destination_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    referencedTableName: destination
+                    referencedColumnNames: id
+                    foreignKeyName: fk_destinations_rules_destination
+              - column:
+                  name: rule_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    referencedTableName: rule
+                    referencedColumnNames: id
+                    foreignKeyName: fk_destinations_rules_rule

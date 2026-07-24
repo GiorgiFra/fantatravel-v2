@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fantatravel Mobile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A1929;
+            color: #FFFFFF;
+            padding-bottom: 80px;
+            line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        /* Logo Header */
+        .app-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 0 16px;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B35 0%, #00A8E8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .logo-subtitle {
+            font-size: 11px;
+            color: #B2BAC2;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(19, 47, 76, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 12px;
+            z-index: 1000;
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 12px;
+            min-width: 70px;
+        }
+
+        .nav-item .material-icons {
+            font-size: 24px;
+            color: #B2BAC2;
+            transition: all 0.3s;
+        }
+
+        .nav-item span:not(.material-icons) {
+            font-size: 11px;
+            font-weight: 600;
+            color: #B2BAC2;
+            transition: all 0.3s;
+        }
+
+        .nav-item.active {
+            background: rgba(255, 107, 53, 0.15);
+        }
+
+        .nav-item.active .material-icons {
+            color: #FF6B35;
+            transform: scale(1.1);
+        }
+
+        .nav-item.active span:not(.material-icons) {
+            color: #FF6B35;
+        }
+
+        /* Header */
+        .page-header {
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B35 0%, #00A8E8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px 12px;
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #B2BAC2;
+        }
+
+        /* Travel Card */
+        .travel-card {
+            background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .travel-card:active {
+            transform: scale(0.98);
+            border-color: #FF6B35;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            border: 1px solid;
+        }
+
+        .badge.admin {
+            background: rgba(255, 193, 7, 0.2);
+            color: #FFC107;
+            border-color: #FFC107;
+        }
+
+        .badge.active {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        /* Podium */
+        .podium {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 12px;
+            padding: 32px 0;
+        }
+
+        .podium-place {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .podium-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .podium-place.first .podium-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            position: relative;
+        }
+
+        .podium-place.first .podium-avatar::before {
+            content: '👑';
+            position: absolute;
+            top: -20px;
+            font-size: 24px;
+        }
+
+        .podium-place.second .podium-avatar {
+            background: linear-gradient(135deg, #C0C0C0 0%, #999999 100%);
+            color: #000;
+        }
+
+        .podium-place.third .podium-avatar {
+            background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%);
+            color: #FFF;
+        }
+
+        .podium-name {
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .podium-points {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FF6B35;
+        }
+
+        .podium-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .podium-place.first .podium-bar {
+            height: 120px;
+            background: linear-gradient(180deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.05) 100%);
+        }
+
+        .podium-place.second .podium-bar {
+            height: 90px;
+            background: linear-gradient(180deg, rgba(192, 192, 192, 0.2) 0%, rgba(192, 192, 192, 0.05) 100%);
+        }
+
+        .podium-place.third .podium-bar {
+            height: 60px;
+            background: linear-gradient(180deg, rgba(205, 127, 50, 0.2) 0%, rgba(205, 127, 50, 0.05) 100%);
+        }
+
+        /* List */
+        .list-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .list-item.gold {
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        /* FAB */
+        .fab {
+            position: fixed;
+            bottom: 90px;
+            right: 16px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.6);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .fab:active {
+            transform: scale(0.9);
+        }
+
+        .fab .material-icons {
+            color: white;
+            font-size: 28px;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Profile */
+        .profile-header {
+            text-align: center;
+            padding: 32px 16px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(0, 168, 232, 0.15) 100%);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 700;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .profile-email {
+            font-size: 14px;
+            color: #B2BAC2;
+        }
+
+        /* Button */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- App Logo -->
+        <div class="app-logo">
+            <div class="logo-icon">✈️</div>
+            <div class="logo-text">
+                <div class="logo-title">Fantatravel</div>
+                <div class="logo-subtitle">IL FANTACALCIO DEI VIAGGI</div>
+            </div>
+        </div>
+
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <div class="page-header">
+                <div class="page-title">🏠 Benvenuto Francesco!</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">✈️</div>
+                    <div class="stat-value" style="color: #FF6B35;">3</div>
+                    <div class="stat-label">Viaggi</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value" style="color: #00A8E8;">5</div>
+                    <div class="stat-label">Squadre</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-value" style="color: #FFC107;">342</div>
+                    <div class="stat-label">Punti</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section">
+                <div class="section-title">⚡ Azioni Rapide</div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                    <div class="list-item" onclick="showPage('create', document.querySelector('.nav-item'))" style="cursor: pointer; padding: 20px; text-align: center; background: linear-gradient(135deg, #FF6B35 0%, #FF8C5A 100%); color: white; border: none;">
+                        <div class="material-icons" style="font-size: 32px; margin-bottom: 8px;">add_circle</div>
+                        <div style="font-weight: 600;">Crea Viaggio</div>
+                    </div>
+                    <div class="list-item" onclick="showPage('manage', document.querySelector('.nav-item'))" style="cursor: pointer; padding: 20px; text-align: center; background: linear-gradient(135deg, #00A8E8 0%, #2EC4FF 100%); color: white; border: none;">
+                        <div class="material-icons" style="font-size: 32px; margin-bottom: 8px;">settings</div>
+                        <div style="font-weight: 600;">Regole</div>
+                    </div>
+                    <div class="list-item" onclick="showPage('special', document.querySelector('.nav-item'))" style="cursor: pointer; padding: 20px; text-align: center; background: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%); color: #1E2025; border: none;">
+                        <div class="material-icons" style="font-size: 32px; margin-bottom: 8px;">stars</div>
+                        <div style="font-weight: 600;">Special</div>
+                    </div>
+                    <div class="list-item" onclick="showPage('points', document.querySelector('.nav-item'))" style="cursor: pointer; padding: 20px; text-align: center; background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%); color: white; border: none;">
+                        <div class="material-icons" style="font-size: 32px; margin-bottom: 8px;">add_task</div>
+                        <div style="font-weight: 600;">Assegna Punti</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span class="material-icons">trending_up</span>
+                    Viaggi Attivi
+                </div>
+                <div class="travel-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">K-Adventure Seoul 2026</div>
+                            <div style="font-size: 13px; color: #B2BAC2; margin-top: 4px;">🇰🇷 Corea del Sud</div>
+                        </div>
+                        <div class="badge admin">ADMIN</div>
+                    </div>
+                    <div style="display: flex; gap: 16px; margin-top: 12px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 20px; font-weight: 700; color: #00A8E8;">8</div>
+                            <div style="font-size: 11px; color: #B2BAC2;">Viaggiatori</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 20px; font-weight: 700; color: #FF6B35;">12</div>
+                            <div style="font-size: 11px; color: #B2BAC2;">Giocatori</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 20px; font-weight: 700; color: #4CAF50;">65%</div>
+                            <div style="font-size: 11px; color: #B2BAC2;">Completato</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRAVELS PAGE -->
+        <div id="travels" class="page">
+            <div class="page-header">
+                <div class="page-title">✈️ I Tuoi Viaggi</div>
+            </div>
+
+            <div class="travel-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">K-Adventure Seoul 2026</div>
+                        <div style="font-size: 13px; color: #B2BAC2; margin-top: 4px;">🇰🇷 Corea del Sud</div>
+                    </div>
+                    <div class="badge active">In corso</div>
+                </div>
+                <div style="font-size: 13px; color: #B2BAC2; margin-top: 8px;">15 Ago - 25 Ago 2026</div>
+            </div>
+
+            <div class="travel-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Tokyo Nights</div>
+                        <div style="font-size: 13px; color: #B2BAC2; margin-top: 4px;">🗾 Giappone</div>
+                    </div>
+                    <div class="badge" style="background: rgba(33, 150, 243, 0.2); color: #2196F3; border-color: #2196F3;">In arrivo</div>
+                </div>
+                <div style="font-size: 13px; color: #B2BAC2; margin-top: 8px;">10 Set - 20 Set 2026</div>
+            </div>
+
+            <button class="fab">
+                <span class="material-icons">add</span>
+            </button>
+        </div>
+
+        <!-- LEADERBOARD PAGE -->
+        <div id="leaderboard" class="page">
+            <div class="page-header">
+                <div class="page-title">🏆 Classifica</div>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 16px;">
+                <div style="font-size: 20px; font-weight: 700; color: #FFC107;">K-Adventure Seoul 2026</div>
+                <div style="font-size: 13px; color: #B2BAC2;">Classifica in tempo reale</div>
+            </div>
+
+            <div class="podium">
+                <div class="podium-place second" style="order: 1;">
+                    <div class="podium-avatar">LV</div>
+                    <div class="podium-name">Luca V.</div>
+                    <div class="podium-points">234</div>
+                    <div class="podium-bar">
+                        <div style="font-size: 32px; font-weight: 700; color: #C0C0C0;">2</div>
+                    </div>
+                </div>
+
+                <div class="podium-place first" style="order: 2;">
+                    <div class="podium-avatar">MR</div>
+                    <div class="podium-name">Marco R.</div>
+                    <div class="podium-points">342</div>
+                    <div class="podium-bar">
+                        <div style="font-size: 40px; font-weight: 700; color: #FFD700;">1</div>
+                    </div>
+                </div>
+
+                <div class="podium-place third" style="order: 3;">
+                    <div class="podium-avatar">GB</div>
+                    <div class="podium-name">Giulia B.</div>
+                    <div class="podium-points">198</div>
+                    <div class="podium-bar">
+                        <div style="font-size: 32px; font-weight: 700; color: #CD7F32;">3</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Classifica Completa</div>
+                <div class="list-item gold">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 24px; font-weight: 700; color: #FFD700;">1</div>
+                        <div>Marco Rossi</div>
+                    </div>
+                    <div style="font-weight: 700; color: #FF6B35;">342 pt</div>
+                </div>
+                <div class="list-item">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 20px; font-weight: 700; color: #C0C0C0;">2</div>
+                        <div>Luca Verdi</div>
+                    </div>
+                    <div style="font-weight: 700; color: #00A8E8;">234 pt</div>
+                </div>
+                <div class="list-item">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 20px; font-weight: 700; color: #CD7F32;">3</div>
+                        <div>Giulia Bianchi</div>
+                    </div>
+                    <div style="font-weight: 700; color: #00A8E8;">198 pt</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE PAGE -->
+        <div id="profile" class="page">
+            <div class="page-header">
+                <div class="page-title">👤 Profilo</div>
+            </div>
+
+            <div class="profile-header">
+                <div class="profile-avatar">FM</div>
+                <div class="profile-name">Francesco Marra</div>
+                <div class="profile-email">francesco@fantatravel.com</div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📊 Statistiche</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value" style="color: #FF6B35;">342</div>
+                        <div class="stat-label">Punti</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✈️</div>
+                        <div class="stat-value" style="color: #00A8E8;">3</div>
+                        <div class="stat-label">Viaggi</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-value" style="color: #4CAF50;">5</div>
+                        <div class="stat-label">Squadre</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🎖️ Achievement</div>
+                <div class="list-item">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">🏆</div>
+                        <div>
+                            <div style="font-weight: 600;">Primo Classificato</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">K-Adventure Seoul 2026</div>
+                        </div>
+                    </div>
+                    <div style="color: #4CAF50; font-weight: 700;">+50</div>
+                </div>
+                <div class="list-item">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">⭐</div>
+                        <div>
+                            <div style="font-weight: 600;">Meme Vivente</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Categoria Special</div>
+                        </div>
+                    </div>
+                    <div style="color: #FFC107; font-weight: 700;">+10</div>
+                </div>
+            </div>
+
+            <button class="btn" style="background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%); margin-top: 32px;">
+                <span class="material-icons">logout</span>
+                Esci
+            </button>
+        </div>
+
+        <!-- CREATE PAGE -->
+        <div id="create" class="page">
+            <div class="page-header">
+                <div class="page-title">➕ Crea Nuovo Viaggio</div>
+            </div>
+
+            <div class="section">
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Nome Viaggio</label>
+                    <input type="text" placeholder="Es: K-Adventure Seoul 2026" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Destinazione</label>
+                    <select style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                        <option>🇰🇷 Corea del Sud</option>
+                        <option>🗾 Giappone</option>
+                        <option>🗼 Francia</option>
+                        <option>🗽 USA (New York)</option>
+                        <option>🏛️ Italia (Roma)</option>
+                        <option>🛕 Thailandia</option>
+                        <option>🎨 Spagna (Barcellona)</option>
+                        <option>🐫 Egitto</option>
+                        <option>🦘 Australia</option>
+                        <option>🎭 Brasile (Rio)</option>
+                    </select>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                    <div>
+                        <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Data Inizio</label>
+                        <input type="date" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Data Fine</label>
+                        <input type="date" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Descrizione</label>
+                    <textarea placeholder="Descrivi il viaggio..." rows="3" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px; resize: none;"></textarea>
+                </div>
+
+                <button class="btn" style="width: 100%; margin-top: 16px;">
+                    <span class="material-icons">flight_takeoff</span>
+                    Crea Viaggio
+                </button>
+            </div>
+        </div>
+
+        <!-- MANAGE PAGE (Bonus/Malus) -->
+        <div id="manage" class="page">
+            <div class="page-header">
+                <div class="page-title">⚙️ Configura Regole</div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🍜 Cibo & Bevande</div>
+                <div class="list-item">
+                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                        <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">K-BBQ Experience</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Completato un pasto BBQ coreano</div>
+                        </div>
+                        <div style="color: #4CAF50; font-weight: 700;">+7</div>
+                    </label>
+                </div>
+                <div class="list-item">
+                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                        <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Bottiglia di Soju</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Finito una bottiglia intera</div>
+                        </div>
+                        <div style="color: #4CAF50; font-weight: 700;">+10</div>
+                    </label>
+                </div>
+                <div class="list-item">
+                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                        <input type="checkbox" style="width: 20px; height: 20px; margin-right: 12px;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Bocca Bruciata</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Ustione al BBQ</div>
+                        </div>
+                        <div style="color: #F44336; font-weight: 700;">-5</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🎭 Cultura</div>
+                <div class="list-item">
+                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                        <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Hanbok Tradizionale</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Indossato per almeno 1 ora</div>
+                        </div>
+                        <div style="color: #4CAF50; font-weight: 700;">+10</div>
+                    </label>
+                </div>
+                <div class="list-item">
+                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                        <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Selfie con K-pop Idol</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Foto con una star K-pop</div>
+                        </div>
+                        <div style="color: #4CAF50; font-weight: 700;">+20</div>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn" style="width: 100%; margin-top: 16px;">
+                <span class="material-icons">save</span>
+                Salva Configurazione
+            </button>
+        </div>
+
+        <!-- SPECIAL PAGE -->
+        <div id="special" class="page">
+            <div class="page-header">
+                <div class="page-title">⭐ Categorie Special</div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🏆 Premi Speciali</div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #FF6B35 0%, #FF8C5A 100%); color: white; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">🚑</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">Pronto Soccorso</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Chi finisce all'ospedale</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">-15</div>
+                    </div>
+                </div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #00A8E8 0%, #2EC4FF 100%); color: white; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">🥇</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">Stomaco d'Acciaio</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Assaggia tutto senza lamentarsi</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">+10</div>
+                    </div>
+                </div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%); color: #1E2025; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">📦</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">Traslocatore</div>
+                            <div style="font-size: 12px; opacity: 0.8;">Valigia più pesante al ritorno</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">+5</div>
+                    </div>
+                </div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #9C27B0 0%, #BA68C8 100%); color: white; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">📸</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">Influencer</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Più foto postate sui social</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">+8</div>
+                    </div>
+                </div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%); color: white; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">😴</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">Dormiglione</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Si addormenta ovunque</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">-3</div>
+                    </div>
+                </div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #F44336 0%, #E57373 100%); color: white; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">🗺️</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">GPS Umano</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Non si perde mai</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">+12</div>
+                    </div>
+                </div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #607D8B 0%, #90A4AE 100%); color: white; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">💸</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">Spendaccione</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Spesa più alta del gruppo</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">-8</div>
+                    </div>
+                </div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #FF9800 0%, #FFB74D 100%); color: white; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">🎤</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">Karaoke King</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Più tempo al karaoke</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">+7</div>
+                    </div>
+                </div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #E91E63 0%, #F06292 100%); color: white; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">🎭</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">Meme Vivente</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Situazioni più assurde</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">+15</div>
+                    </div>
+                </div>
+
+                <div class="list-item" style="background: linear-gradient(135deg, #3F51B5 0%, #7986CB 100%); color: white; border: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 32px;">🧘</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px;">Zen Master</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Mai stressato, sempre calmo</div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 18px;">+6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- POINTS PAGE (Admin/Player View) -->
+        <div id="points" class="page">
+            <div class="page-header">
+                <div class="page-title">📊 Assegnazione Punti</div>
+            </div>
+
+            <!-- Toggle Admin/Player -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; background: #2C3038; border-radius: 12px; padding: 4px;">
+                <button onclick="document.getElementById('admin-view').style.display='block'; document.getElementById('player-view').style.display='none'; this.style.background='linear-gradient(135deg, #FF6B35, #FF8C5A)'; this.nextElementSibling.style.background='transparent';" style="flex: 1; padding: 12px; border: none; border-radius: 10px; background: linear-gradient(135deg, #FF6B35, #FF8C5A); color: white; font-weight: 600; cursor: pointer;">
+                    👑 Vista Admin
+                </button>
+                <button onclick="document.getElementById('player-view').style.display='block'; document.getElementById('admin-view').style.display='none'; this.style.background='linear-gradient(135deg, #00A8E8, #2EC4FF)'; this.previousElementSibling.style.background='transparent';" style="flex: 1; padding: 12px; border: none; border-radius: 10px; background: transparent; color: white; font-weight: 600; cursor: pointer;">
+                    🎮 Vista Player
+                </button>
+            </div>
+
+            <!-- Admin View -->
+            <div id="admin-view">
+                <div class="section">
+                    <div class="section-title">👥 Seleziona Viaggiatore</div>
+                    <select style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px; margin-bottom: 16px;">
+                        <option>Francesco Marra</option>
+                        <option>Mario Rossi</option>
+                        <option>Laura Bianchi</option>
+                    </select>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎯 Assegna Regole</div>
+
+                    <div class="list-item">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">K-BBQ Experience</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Completato BBQ coreano</div>
+                        </div>
+                        <button style="padding: 8px 16px; border-radius: 8px; border: none; background: #4CAF50; color: white; font-weight: 600; cursor: pointer;">+7</button>
+                    </div>
+
+                    <div class="list-item">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Bottiglia di Soju</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Finito una bottiglia intera</div>
+                        </div>
+                        <button style="padding: 8px 16px; border-radius: 8px; border: none; background: #4CAF50; color: white; font-weight: 600; cursor: pointer;">+10</button>
+                    </div>
+
+                    <div class="list-item">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Bocca Bruciata</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Ustione al BBQ</div>
+                        </div>
+                        <button style="padding: 8px 16px; border-radius: 8px; border: none; background: #F44336; color: white; font-weight: 600; cursor: pointer;">-5</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player View -->
+            <div id="player-view" style="display: none;">
+                <div class="section">
+                    <div class="section-title">📈 I Miei Punti</div>
+
+                    <div class="stat-card" style="text-align: center; padding: 32px; background: linear-gradient(135deg, #FF6B35, #FF8C5A);">
+                        <div style="font-size: 48px; font-weight: 700; color: white;">342</div>
+                        <div style="font-size: 14px; color: white; opacity: 0.9;">Punti Totali</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📜 Storico</div>
+
+                    <div class="list-item">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">K-BBQ Experience</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">18 Ago 2026 - 14:30</div>
+                        </div>
+                        <div style="color: #4CAF50; font-weight: 700;">+7</div>
+                    </div>
+
+                    <div class="list-item">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Hanbok Tradizionale</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">19 Ago 2026 - 10:15</div>
+                        </div>
+                        <div style="color: #4CAF50; font-weight: 700;">+10</div>
+                    </div>
+
+                    <div class="list-item">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Meme Vivente (Special)</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">20 Ago 2026 - 22:00</div>
+                        </div>
+                        <div style="color: #FFC107; font-weight: 700;">+15</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showPage('home', this)">
+            <span class="material-icons">home</span>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="showPage('travels', this)">
+            <span class="material-icons">flight</span>
+            <span>Viaggi</span>
+        </div>
+        <div class="nav-item" onclick="showPage('leaderboard', this)">
+            <span class="material-icons">emoji_events</span>
+            <span>Classifica</span>
+        </div>
+        <div class="nav-item" onclick="showPage('profile', this)">
+            <span class="material-icons">person</span>
+            <span>Profilo</span>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId, element) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Remove active from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Add active to clicked nav item
+            if (element) {
+                element.classList.add('active');
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Prevent pull-to-refresh
+        document.body.style.overscrollBehavior = 'none';
+    </script>
+</body>
+</html>

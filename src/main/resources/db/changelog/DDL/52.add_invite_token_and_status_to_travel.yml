@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 52-add-invite-token-and-status-to-travel
+      author: francesco.marra
+      changes:
+        - addColumn:
+            tableName: travel
+            columns:
+              - column:
+                  name: invite_token
+                  type: VARCHAR(36)
+                  constraints:
+                    unique: true
+                    nullable: true
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+                  defaultValue: 'DRAFT'
+        - addUniqueConstraint:
+            tableName: travel
+            columnNames: invite_token
+            constraintName: uk_travel_invite_token
+      rollback:
+        - dropColumn:
+            tableName: travel
+            columns:
+              - column:
+                  name: invite_token
+              - column:
+                  name: status

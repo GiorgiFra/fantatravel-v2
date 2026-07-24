@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 22.1-add-id-column-nullable
+      author: alessandro.fazari
+      changes:
+        - addColumn:
+            tableName: travels_rules
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  remarks: "New nullable id column"
+
+  - changeSet:
+      id: 22.2-create-sequence-for-id
+      author: alessandro.fazari
+      changes:
+        - createSequence:
+            sequenceName: travels_rules_id_seq
+            startValue: 1
+
+  - changeSet:
+      id: 22.3-populate-id
+      author: alessandro.fazari
+      changes:
+        - sql:
+            stripComments: true
+            splitStatements: false
+            sql: |
+              UPDATE travels_rules SET id = nextval('travels_rules_id_seq') WHERE id IS NULL;
+
+  - changeSet:
+      id: 22.4-set-id-not-null
+      author: alessandro.fazari
+      changes:
+        - modifyDataType:
+            tableName: travels_rules
+            columnName: id
+            newDataType: BIGINT
+  - changeSet:
+      id: 22.5-set-id-not-null
+      author: alessandro.fazari
+      changes:
+        - sql:
+            sql: |
+              ALTER TABLE travels_rules ALTER COLUMN id SET NOT NULL;
+
+  - changeSet:
+      id: 22.6-add-primary-key-id
+      author: alessandro.fazari
+      changes:
+        - addPrimaryKey:
+            tableName: travels_rules
+            columnNames: id
+            constraintName: pk_travels_rules_id
+
+  - changeSet:
+      id: 22.7-add-unique-constraint-travel-rule
+      author: alessandro.fazari
+      changes:
+        - addUniqueConstraint:
+            tableName: travels_rules
+            columnNames: travel_id, rule_id
+            constraintName: unique_travels_rules

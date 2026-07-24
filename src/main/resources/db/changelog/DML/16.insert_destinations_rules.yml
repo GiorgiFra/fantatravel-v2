@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 16
+      author: alessandro.fazari
+      changes:
+        - sql:
+            sql: >
+              INSERT INTO destinations_rules (destination_id, rule_id)
+              SELECT
+                (SELECT id FROM destination LIMIT 1) AS destination_id,
+                r.id AS rule_id
+              FROM
+                fantatravel.rule r;

@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 19.1-add-id-column-nullable
+      author: alessandro.fazari
+      changes:
+        - addColumn:
+            tableName: travels_users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  remarks: "New nullable id column"
+
+  - changeSet:
+      id: 19.2-create-sequence-for-id
+      author: alessandro.fazari
+      changes:
+        - createSequence:
+            sequenceName: travels_users_id_seq
+            startValue: 1
+
+  - changeSet:
+      id: 19.3-populate-id
+      author: alessandro.fazari
+      changes:
+        - sql:
+            stripComments: true
+            splitStatements: false
+            sql: |
+              UPDATE travels_users SET id = nextval('travels_users_id_seq') WHERE id IS NULL;
+
+  - changeSet:
+      id: 19.4-set-id-not-null
+      author: yourname
+      changes:
+        - modifyDataType:
+            tableName: travels_users
+            columnName: id
+            newDataType: BIGINT
+  - changeSet:
+      id: 19.5-set-id-not-null
+      author: yourname
+      changes:
+        - sql:
+            sql: |
+              ALTER TABLE travels_users ALTER COLUMN id SET NOT NULL;
+
+  - changeSet:
+      id: 19.6-add-primary-key-id
+      author: yourname
+      changes:
+        - addPrimaryKey:
+            tableName: travels_users
+            columnNames: id
+            constraintName: pk_travels_users_id
+
+  - changeSet:
+      id: 19.7-add-unique-constraint-travel-user
+      author: yourname
+      changes:
+        - addUniqueConstraint:
+            tableName: travels_users
+            columnNames: travel_id, user_id
+            constraintName: unique_travel_user

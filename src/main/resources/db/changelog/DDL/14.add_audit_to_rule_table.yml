@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 14
+      author: alessandro.fazari
+      changes:
+        - addColumn:
+            tableName: rule
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addColumn:
+            tableName: rule
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false

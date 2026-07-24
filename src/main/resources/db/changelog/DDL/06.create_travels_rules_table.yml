@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: alessandro.fazari
+      changes:
+        - createTable:
+            tableName: travels_rules
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: travel_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    referencedTableName: travel
+                    referencedColumnNames: id
+                    foreignKeyName: fk_travels_rules_travel
+              - column:
+                  name: rule_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    referencedTableName: rule
+                    referencedColumnNames: id
+                    foreignKeyName: fk_travels_rules_rule
+              - column:
+                  name: repeatable
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: INTEGER
+                  constraints:
+                    nullable: false

@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: alessandro.fazari
+      changes:
+        - createTable:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+                  constraints:
+                    nullable: true

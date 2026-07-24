@@ -1,0 +1,64 @@
+version: ${project.version:1.0.0}
+server:
+  port: ${SERVER_PORT:8080}
+  address: 0.0.0.0
+  servlet:
+    context-path: /fantatravel
+spring:
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+  datasource:
+    url: ${DB_HOST:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PWD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: fantatravel
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-master.yml
+    contexts: dev
+    default-schema: fantatravel
+  mail:
+    host: ssl0.ovh.net
+    port: 465
+    username: noreply@fantatravel.ovh
+    password: ${MAIL_PWD:Fantatravel25!}
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          starttls:
+            enable: false
+logging:
+  level:
+    org.springframework: DEBUG
+    com.fantatravel: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+  pattern:
+    file: ${LOG_PATTERN:%d{yyyy-MM-dd HH:mm:ss.SSS} - [%thread] %-5level %class{36}.%M %L - %msg%n}
+    console: ${LOG_PATTERN:%d{yyyy-MM-dd HH:mm:ss.SSS} - [%thread] %-5level %class{36}.%M %L - %msg%n}
+  file:
+    name: ${LOG_PATH:/tmp/fantabet/logs}/${APP_NAME:fantabet}.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${LOG_PATH:/tmp/fantabet/logs}/${APP_NAME:fantabet}.%d{yyyy-MM-dd}.%i.gz
+      max-history: ${LOG_FILE_MAX_HISTORY:30}
+      max-file-size: ${LOG_FILE_MAX_SIZE:100MB}
+security:
+  jwt:
+    secret: 7fb746c6edbfd83f89432d08c3626574594ab6c2126d9937778e2bc8f865b35a
+  path:
+    permitted:
+      list: /, /static/**, /index.html, /app/**, /icons/**, /manifest.json, /service-worker.js, /v3/api-docs/**, /swagger-ui/**, /swagger-ui.html, /api/users/register, /api/users/reset-password, /api/users/reset-password/request, /api/users/confirm/**, /api/auth/login, /api/auth/refresh, /api/users/find-user-confirmation
+backup-path: ${BACKUP_PATH:/Users/alessandro/fantatravel/db/fantatravel.tar.gz}
+backup-cron: ${BACKUP_CRON:1 45 1 * * *}
+cors:
+  allowed-origins: http://localhost,http://localhost:3000,capacitor://localhost,app://localhost,https://fantatravel.ovh, https://www.fantatravel.ovh

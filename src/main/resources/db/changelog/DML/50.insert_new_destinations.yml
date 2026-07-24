@@ -1,0 +1,145 @@
+databaseChangeLog:
+  - changeSet:
+      id: 50
+      author: claude
+      changes:
+        # Corea del Sud
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: "SOUTH_KOREA"
+              - column:
+                  name: description
+                  value: "SOUTH_KOREA_DESC"
+        # Giappone - Tokyo
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: "JAPAN"
+              - column:
+                  name: description
+                  value: "JAPAN_DESC"
+        # Francia - Parigi
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: "FRANCE"
+              - column:
+                  name: description
+                  value: "FRANCE_DESC"
+        # USA - New York
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: name
+                  value: "USA_NEW_YORK"
+              - column:
+                  name: description
+                  value: "USA_NEW_YORK_DESC"
+        # Italia - Roma
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: name
+                  value: "ITALY_ROME"
+              - column:
+                  name: description
+                  value: "ITALY_ROME_DESC"
+        # Thailandia - Bangkok
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: name
+                  value: "THAILAND"
+              - column:
+                  name: description
+                  value: "THAILAND_DESC"
+        # Spagna - Barcellona
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: name
+                  value: "SPAIN_BARCELONA"
+              - column:
+                  name: description
+                  value: "SPAIN_BARCELONA_DESC"
+        # Egitto - Cairo
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 9
+              - column:
+                  name: name
+                  value: "EGYPT"
+              - column:
+                  name: description
+                  value: "EGYPT_DESC"
+        # Australia - Sydney
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 10
+              - column:
+                  name: name
+                  value: "AUSTRALIA"
+              - column:
+                  name: description
+                  value: "AUSTRALIA_DESC"
+        # Brasile - Rio de Janeiro
+        - insert:
+            tableName: destination
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  value: 11
+              - column:
+                  name: name
+                  value: "BRAZIL_RIO"
+              - column:
+                  name: description
+                  value: "BRAZIL_RIO_DESC"

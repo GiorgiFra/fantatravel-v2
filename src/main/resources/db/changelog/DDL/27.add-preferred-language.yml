@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-preferred-language-to-users
+      author: alessandro.fazari
+      changes:
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: preferred_language
+                  type: varchar(10)
+                  remarks: "Lingua preferita dell'utente (es. 'it', 'en')"
+                  defaultValue: "en"
+        - update:
+            tableName: user
+            columns:
+                - column:
+                    name: preferred_language
+                    value: "en"
+            where: "preferred_language IS NULL"

@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: alessandro.fazari
+      changes:
+        - createTable:
+            tableName: travel
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: destination_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    referencedTableName: destination
+                    referencedColumnNames: id
+                    foreignKeyName: fk_travel_destination
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    referencedTableName: user
+                    referencedColumnNames: id
+                    foreignKeyName: fk_travel_created_by
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updated_by
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    referencedTableName: user
+                    referencedColumnNames: id
+                    foreignKeyName: fk_travel_updated_by

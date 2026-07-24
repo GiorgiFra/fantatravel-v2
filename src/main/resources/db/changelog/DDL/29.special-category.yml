@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250814-1
+      author: fantatravel
+      changes:
+        - createTable:
+            tableName: special_category
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updated_by
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: special_category
+            baseColumnNames: created_by
+            referencedTableName: user
+            referencedColumnNames: id
+            constraintName: fk_special_category_created_by
+        - addForeignKeyConstraint:
+            baseTableName: special_category
+            baseColumnNames: updated_by
+            referencedTableName: user
+            referencedColumnNames: id
+            constraintName: fk_special_category_updated_by

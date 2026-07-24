@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 8
+      author: alessandro.fazari
+      changes:
+        - addColumn:
+            tableName: rule
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: category_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseTableName: rule
+            baseColumnNames: category_id
+            referencedTableName: category
+            referencedColumnNames: id
+            constraintName: fk_rule_category
+            baseTableSchemaName: fantatravel
+            referencedTableSchemaName: fantatravel

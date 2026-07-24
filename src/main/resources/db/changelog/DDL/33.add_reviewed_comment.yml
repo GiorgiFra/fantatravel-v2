@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-reviewed-comment-to-travel
+      author: alessandro.fazari
+      changes:
+        - addColumn:
+            tableName: travel
+            columns:
+              - column:
+                  name: reviewed_comment
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true

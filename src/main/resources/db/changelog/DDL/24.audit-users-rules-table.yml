@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: 12
+      author: alessandro.fazari
+      changes:
+        - addColumn:
+            tableName: point
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: updated_by
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    referencedTableName: user
+                    referencedColumnNames: id
+                    foreignKeyName: fk_point_updated_by
+        - addColumn:
+            tableName: point
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    referencedTableName: user
+                    referencedColumnNames: id
+                    foreignKeyName: fk_point_created_by
+        - addColumn:
+            tableName: point
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addColumn:
+            tableName: point
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false

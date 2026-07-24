@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 12
+      author: alessandro.fazari
+      changes:
+        - addColumn:
+            tableName: team
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: updated_by
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    referencedTableName: user
+                    referencedColumnNames: id
+                    foreignKeyName: fk_rule_updated_by
+        - addColumn:
+            tableName: team
+            schemaName: fantatravel
+            columns:
+              - column:
+                  name: created_by
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    referencedTableName: user
+                    referencedColumnNames: id
+                    foreignKeyName: fk_rule_created_by

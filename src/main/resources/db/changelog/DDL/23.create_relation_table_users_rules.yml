@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: 23.create-point-table
+      author: fantatravel
+      changes:
+        - createTable:
+            tableName: point
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_point
+                    nullable: false
+              - column:
+                  name: travels_rules_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: travels_users_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: day
+                  type: DATE
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: point
+            baseColumnNames: travels_rules_id
+            referencedTableName: travels_rules
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_travels_rules
+        - addForeignKeyConstraint:
+            baseTableName: point
+            baseColumnNames: travels_users_id
+            referencedTableName: travels_users
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_travels_users
+        - addUniqueConstraint:
+            tableName: point
+            columnNames: travels_rules_id, travels_users_id, day
+            constraintName: uq_travel_rule_user_day
