@@ -447,7 +447,46 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- LOGIN PAGE (shown first) -->
+    <div id="login-page" class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <div style="font-size: 80px; margin-bottom: 16px;">✈️</div>
+            <div style="font-size: 32px; font-weight: 700; background: linear-gradient(135deg, #FF6B35, #00A8E8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px;">
+                Fantatravel
+            </div>
+            <div style="font-size: 14px; color: #B2BAC2; font-weight: 600;">IL FANTACALCIO DEI VIAGGI</div>
+        </div>
+
+        <div style="width: 100%; max-width: 400px; background: #2C3038; border-radius: 16px; padding: 32px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);">
+            <div style="margin-bottom: 24px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Email</label>
+                <input type="email" id="loginEmail" placeholder="francesco@fantatravel.com" style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #3C4048; background: #1E2025; color: white; font-size: 14px;">
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #3C4048; background: #1E2025; color: white; font-size: 14px;">
+            </div>
+
+            <button onclick="doLogin()" class="btn" style="width: 100%; margin-bottom: 16px; background: linear-gradient(135deg, #FF6B35 0%, #FF8C5A 100%);">
+                <span class="material-icons">login</span>
+                Accedi
+            </button>
+
+            <div style="text-align: center;">
+                <a href="#" style="color: #00A8E8; font-size: 13px; text-decoration: none;">Password dimenticata?</a>
+                <div style="margin: 16px 0; color: #B2BAC2;">oppure</div>
+                <a href="#" style="color: #FF6B35; font-size: 13px; text-decoration: none; font-weight: 600;">Crea un nuovo account</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 32px; text-align: center; color: #B2BAC2; font-size: 12px;">
+            <div>Demo credentials:</div>
+            <div style="font-family: monospace; margin-top: 8px;">francesco@fantatravel.com / demo123</div>
+        </div>
+    </div>
+
+    <div class="container" id="app-container" style="display: none;">
         <!-- App Logo -->
         <div class="app-logo">
             <div class="logo-icon">✈️</div>
@@ -579,57 +618,170 @@
                 <div style="font-size: 13px; color: #B2BAC2;">Classifica in tempo reale</div>
             </div>
 
-            <div class="podium">
-                <div class="podium-place second" style="order: 1;">
-                    <div class="podium-avatar">LV</div>
-                    <div class="podium-name">Luca V.</div>
-                    <div class="podium-points">234</div>
-                    <div class="podium-bar">
-                        <div style="font-size: 32px; font-weight: 700; color: #C0C0C0;">2</div>
+            <!-- Toggle Viaggiatori/Squadre -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; background: #2C3038; border-radius: 12px; padding: 4px;">
+                <button onclick="document.getElementById('travelers-leaderboard').style.display='block'; document.getElementById('teams-leaderboard').style.display='none'; this.style.background='linear-gradient(135deg, #FF6B35, #FF8C5A)'; this.nextElementSibling.style.background='transparent';" style="flex: 1; padding: 12px; border: none; border-radius: 10px; background: linear-gradient(135deg, #FF6B35, #FF8C5A); color: white; font-weight: 600; cursor: pointer;">
+                    🧳 Viaggiatori
+                </button>
+                <button onclick="document.getElementById('teams-leaderboard').style.display='block'; document.getElementById('travelers-leaderboard').style.display='none'; this.style.background='linear-gradient(135deg, #00A8E8, #2EC4FF)'; this.previousElementSibling.style.background='transparent';" style="flex: 1; padding: 12px; border: none; border-radius: 10px; background: transparent; color: white; font-weight: 600; cursor: pointer;">
+                    🏆 Squadre
+                </button>
+            </div>
+
+            <!-- Classifica Viaggiatori -->
+            <div id="travelers-leaderboard">
+                <div class="podium">
+                    <div class="podium-place second" style="order: 1;">
+                        <div class="podium-avatar">LV</div>
+                        <div class="podium-name">Luca V.</div>
+                        <div class="podium-points">234</div>
+                        <div class="podium-bar">
+                            <div style="font-size: 32px; font-weight: 700; color: #C0C0C0;">2</div>
+                        </div>
+                    </div>
+
+                    <div class="podium-place first" style="order: 2;">
+                        <div class="podium-avatar">MR</div>
+                        <div class="podium-name">Marco R.</div>
+                        <div class="podium-points">342</div>
+                        <div class="podium-bar">
+                            <div style="font-size: 40px; font-weight: 700; color: #FFD700;">1</div>
+                        </div>
+                    </div>
+
+                    <div class="podium-place third" style="order: 3;">
+                        <div class="podium-avatar">GB</div>
+                        <div class="podium-name">Giulia B.</div>
+                        <div class="podium-points">198</div>
+                        <div class="podium-bar">
+                            <div style="font-size: 32px; font-weight: 700; color: #CD7F32;">3</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="podium-place first" style="order: 2;">
-                    <div class="podium-avatar">MR</div>
-                    <div class="podium-name">Marco R.</div>
-                    <div class="podium-points">342</div>
-                    <div class="podium-bar">
-                        <div style="font-size: 40px; font-weight: 700; color: #FFD700;">1</div>
+                <div class="section">
+                    <div class="section-title">🧳 Classifica Viaggiatori</div>
+                    <div class="list-item gold">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 24px; font-weight: 700; color: #FFD700;">1</div>
+                            <div>Marco Rossi</div>
+                        </div>
+                        <div style="font-weight: 700; color: #FF6B35;">342 pt</div>
                     </div>
-                </div>
-
-                <div class="podium-place third" style="order: 3;">
-                    <div class="podium-avatar">GB</div>
-                    <div class="podium-name">Giulia B.</div>
-                    <div class="podium-points">198</div>
-                    <div class="podium-bar">
-                        <div style="font-size: 32px; font-weight: 700; color: #CD7F32;">3</div>
+                    <div class="list-item">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 20px; font-weight: 700; color: #C0C0C0;">2</div>
+                            <div>Luca Verdi</div>
+                        </div>
+                        <div style="font-weight: 700; color: #00A8E8;">234 pt</div>
+                    </div>
+                    <div class="list-item">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 20px; font-weight: 700; color: #CD7F32;">3</div>
+                            <div>Giulia Bianchi</div>
+                        </div>
+                        <div style="font-weight: 700; color: #00A8E8;">198 pt</div>
+                    </div>
+                    <div class="list-item">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 18px; font-weight: 700; color: #B2BAC2;">4</div>
+                            <div>Anna Neri</div>
+                        </div>
+                        <div style="font-weight: 700; color: #00A8E8;">176 pt</div>
+                    </div>
+                    <div class="list-item">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 18px; font-weight: 700; color: #B2BAC2;">5</div>
+                            <div>Paolo Gialli</div>
+                        </div>
+                        <div style="font-weight: 700; color: #00A8E8;">152 pt</div>
                     </div>
                 </div>
             </div>
 
-            <div class="section">
-                <div class="section-title">Classifica Completa</div>
-                <div class="list-item gold">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 24px; font-weight: 700; color: #FFD700;">1</div>
-                        <div>Marco Rossi</div>
+            <!-- Classifica Squadre -->
+            <div id="teams-leaderboard" style="display: none;">
+                <div class="podium">
+                    <div class="podium-place second" style="order: 1;">
+                        <div class="podium-avatar" style="background: linear-gradient(135deg, #00A8E8, #2EC4FF);">2°</div>
+                        <div class="podium-name">Dream Team</div>
+                        <div class="podium-points">1.245</div>
+                        <div class="podium-bar">
+                            <div style="font-size: 32px; font-weight: 700; color: #C0C0C0;">2</div>
+                        </div>
                     </div>
-                    <div style="font-weight: 700; color: #FF6B35;">342 pt</div>
+
+                    <div class="podium-place first" style="order: 2;">
+                        <div class="podium-avatar" style="background: linear-gradient(135deg, #FFD700, #FFC107);">1°</div>
+                        <div class="podium-name">I Fantaviaggiatori</div>
+                        <div class="podium-points">1.567</div>
+                        <div class="podium-bar">
+                            <div style="font-size: 40px; font-weight: 700; color: #FFD700;">1</div>
+                        </div>
+                    </div>
+
+                    <div class="podium-place third" style="order: 3;">
+                        <div class="podium-avatar" style="background: linear-gradient(135deg, #CD7F32, #B8860B);">3°</div>
+                        <div class="podium-name">Travel Kings</div>
+                        <div class="podium-points">1.098</div>
+                        <div class="podium-bar">
+                            <div style="font-size: 32px; font-weight: 700; color: #CD7F32;">3</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="list-item">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 20px; font-weight: 700; color: #C0C0C0;">2</div>
-                        <div>Luca Verdi</div>
+
+                <div class="section">
+                    <div class="section-title">🏆 Classifica Squadre</div>
+                    <div class="list-item gold">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 24px; font-weight: 700; color: #FFD700;">1</div>
+                            <div>
+                                <div style="font-weight: 700;">I Fantaviaggiatori</div>
+                                <div style="font-size: 11px; color: #B2BAC2;">Francesco M.</div>
+                            </div>
+                        </div>
+                        <div style="font-weight: 700; color: #FF6B35;">1.567 pt</div>
                     </div>
-                    <div style="font-weight: 700; color: #00A8E8;">234 pt</div>
-                </div>
-                <div class="list-item">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 20px; font-weight: 700; color: #CD7F32;">3</div>
-                        <div>Giulia Bianchi</div>
+                    <div class="list-item">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 20px; font-weight: 700; color: #C0C0C0;">2</div>
+                            <div>
+                                <div style="font-weight: 700;">Dream Team</div>
+                                <div style="font-size: 11px; color: #B2BAC2;">Laura B.</div>
+                            </div>
+                        </div>
+                        <div style="font-weight: 700; color: #00A8E8;">1.245 pt</div>
                     </div>
-                    <div style="font-weight: 700; color: #00A8E8;">198 pt</div>
+                    <div class="list-item">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 20px; font-weight: 700; color: #CD7F32;">3</div>
+                            <div>
+                                <div style="font-weight: 700;">Travel Kings</div>
+                                <div style="font-size: 11px; color: #B2BAC2;">Mario R.</div>
+                            </div>
+                        </div>
+                        <div style="font-weight: 700; color: #00A8E8;">1.098 pt</div>
+                    </div>
+                    <div class="list-item">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 18px; font-weight: 700; color: #B2BAC2;">4</div>
+                            <div>
+                                <div style="font-weight: 700;">Gli Avventurieri</div>
+                                <div style="font-size: 11px; color: #B2BAC2;">Anna N.</div>
+                            </div>
+                        </div>
+                        <div style="font-weight: 700; color: #00A8E8;">987 pt</div>
+                    </div>
+                    <div class="list-item">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 18px; font-weight: 700; color: #B2BAC2;">5</div>
+                            <div>
+                                <div style="font-weight: 700;">Wanderlust FC</div>
+                                <div style="font-size: 11px; color: #B2BAC2;">Paolo G.</div>
+                            </div>
+                        </div>
+                        <div style="font-weight: 700; color: #00A8E8;">856 pt</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1040,8 +1192,8 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
         <div class="nav-item active" onclick="showPage('home', this)">
             <span class="material-icons">home</span>
             <span>Home</span>
@@ -1059,6 +1211,37 @@
             <span>Profilo</span>
         </div>
     </div>
+    </div>
+
+    <script>
+        // Login function
+        function doLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Simple validation (demo only)
+            if (!email || !password) {
+                alert('⚠️ Inserisci email e password');
+                return;
+            }
+
+            // Hide login, show app
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('app-container').style.display = 'block';
+        }
+
+        // Allow Enter key on password field
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordField = document.getElementById('loginPassword');
+            if (passwordField) {
+                passwordField.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        doLogin();
+                    }
+                });
+            }
+        });
+    </script>
 
     <script>
         function showPage(pageId, element) {
