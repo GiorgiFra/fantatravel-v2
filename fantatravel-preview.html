@@ -885,117 +885,59 @@
                 <div class="page-title">⭐ Categorie Special</div>
             </div>
 
+            <!-- Form Nuova Special -->
+            <div class="section" style="background: linear-gradient(135deg, #2C3038 0%, #1E2025 100%); border: 2px solid #FFC107; padding: 20px; margin-bottom: 20px;">
+                <div class="section-title" style="color: #FFC107;">➕ Aggiungi Categoria Special</div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Nome Categoria</label>
+                    <input type="text" id="newSpecialName" placeholder="Es: Party Animal" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Descrizione</label>
+                    <input type="text" id="newSpecialDescription" placeholder="Es: Chi fa più festa" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                    <div>
+                        <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Emoji</label>
+                        <input type="text" id="newSpecialEmoji" placeholder="🎉" maxlength="2" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 24px; text-align: center;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Punti (+ bonus, - malus)</label>
+                        <input type="number" id="newSpecialValue" placeholder="0" value="0" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Colore Gradient</label>
+                    <select id="newSpecialColor" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                        <option value="orange">🟠 Arancione</option>
+                        <option value="blue">🔵 Blu</option>
+                        <option value="yellow">🟡 Giallo</option>
+                        <option value="purple">🟣 Viola</option>
+                        <option value="green">🟢 Verde</option>
+                        <option value="red">🔴 Rosso</option>
+                        <option value="gray">⚪ Grigio</option>
+                        <option value="pink">🩷 Rosa</option>
+                        <option value="indigo">🔷 Indaco</option>
+                    </select>
+                </div>
+
+                <button class="btn" onclick="addCustomSpecial()" style="background: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%); color: #1E2025;">
+                    <span class="material-icons">stars</span>
+                    Aggiungi Special
+                </button>
+            </div>
+
+            <!-- Lista Special Esistenti -->
             <div class="section">
-                <div class="section-title">🏆 Premi Speciali</div>
+                <div class="section-title">🏆 Special Attive</div>
+                <div style="font-size: 13px; color: #B2BAC2; margin-bottom: 16px;">Seleziona le categorie special da utilizzare in questo viaggio</div>
 
-                <div class="list-item" style="background: linear-gradient(135deg, #FF6B35 0%, #FF8C5A 100%); color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">🚑</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">Pronto Soccorso</div>
-                            <div style="font-size: 12px; opacity: 0.9;">Chi finisce all'ospedale</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">-15</div>
-                    </div>
-                </div>
+                <div id="specialsList">
 
-                <div class="list-item" style="background: linear-gradient(135deg, #00A8E8 0%, #2EC4FF 100%); color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">🥇</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">Stomaco d'Acciaio</div>
-                            <div style="font-size: 12px; opacity: 0.9;">Assaggia tutto senza lamentarsi</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">+10</div>
-                    </div>
-                </div>
-
-                <div class="list-item" style="background: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%); color: #1E2025; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">📦</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">Traslocatore</div>
-                            <div style="font-size: 12px; opacity: 0.8;">Valigia più pesante al ritorno</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">+5</div>
-                    </div>
-                </div>
-
-                <div class="list-item" style="background: linear-gradient(135deg, #9C27B0 0%, #BA68C8 100%); color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">📸</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">Influencer</div>
-                            <div style="font-size: 12px; opacity: 0.9;">Più foto postate sui social</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">+8</div>
-                    </div>
-                </div>
-
-                <div class="list-item" style="background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%); color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">😴</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">Dormiglione</div>
-                            <div style="font-size: 12px; opacity: 0.9;">Si addormenta ovunque</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">-3</div>
-                    </div>
-                </div>
-
-                <div class="list-item" style="background: linear-gradient(135deg, #F44336 0%, #E57373 100%); color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">🗺️</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">GPS Umano</div>
-                            <div style="font-size: 12px; opacity: 0.9;">Non si perde mai</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">+12</div>
-                    </div>
-                </div>
-
-                <div class="list-item" style="background: linear-gradient(135deg, #607D8B 0%, #90A4AE 100%); color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">💸</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">Spendaccione</div>
-                            <div style="font-size: 12px; opacity: 0.9;">Spesa più alta del gruppo</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">-8</div>
-                    </div>
-                </div>
-
-                <div class="list-item" style="background: linear-gradient(135deg, #FF9800 0%, #FFB74D 100%); color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">🎤</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">Karaoke King</div>
-                            <div style="font-size: 12px; opacity: 0.9;">Più tempo al karaoke</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">+7</div>
-                    </div>
-                </div>
-
-                <div class="list-item" style="background: linear-gradient(135deg, #E91E63 0%, #F06292 100%); color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">🎭</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">Meme Vivente</div>
-                            <div style="font-size: 12px; opacity: 0.9;">Situazioni più assurde</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">+15</div>
-                    </div>
-                </div>
-
-                <div class="list-item" style="background: linear-gradient(135deg, #3F51B5 0%, #7986CB 100%); color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 32px;">🧘</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700; font-size: 16px;">Zen Master</div>
-                            <div style="font-size: 12px; opacity: 0.9;">Mai stressato, sempre calmo</div>
-                        </div>
-                        <div style="font-weight: 700; font-size: 18px;">+6</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1222,6 +1164,108 @@
             // Success feedback
             alert('✅ Regola aggiunta con successo!');
         }
+
+        // Add custom special category function
+        const specialCategories = [
+            { emoji: '🚑', name: 'Pronto Soccorso', description: 'Chi finisce all\'ospedale', value: -15, color: 'orange' },
+            { emoji: '🥇', name: 'Stomaco d\'Acciaio', description: 'Assaggia tutto senza lamentarsi', value: 10, color: 'blue' },
+            { emoji: '📦', name: 'Traslocatore', description: 'Valigia più pesante al ritorno', value: 5, color: 'yellow' },
+            { emoji: '📸', name: 'Influencer', description: 'Più foto postate sui social', value: 8, color: 'purple' },
+            { emoji: '😴', name: 'Dormiglione', description: 'Si addormenta ovunque', value: -3, color: 'green' },
+            { emoji: '🗺️', name: 'GPS Umano', description: 'Non si perde mai', value: 12, color: 'red' },
+            { emoji: '💸', name: 'Spendaccione', description: 'Spesa più alta del gruppo', value: -8, color: 'gray' },
+            { emoji: '🎤', name: 'Karaoke King', description: 'Più tempo al karaoke', value: 7, color: 'orange' },
+            { emoji: '🎭', name: 'Meme Vivente', description: 'Situazioni più assurde', value: 15, color: 'pink' },
+            { emoji: '🧘', name: 'Zen Master', description: 'Mai stressato, sempre calmo', value: 6, color: 'indigo' }
+        ];
+
+        const colorGradients = {
+            'orange': { from: '#FF6B35', to: '#FF8C5A', text: 'white' },
+            'blue': { from: '#00A8E8', to: '#2EC4FF', text: 'white' },
+            'yellow': { from: '#FFC107', to: '#FFD54F', text: '#1E2025' },
+            'purple': { from: '#9C27B0', to: '#BA68C8', text: 'white' },
+            'green': { from: '#4CAF50', to: '#66BB6A', text: 'white' },
+            'red': { from: '#F44336', to: '#E57373', text: 'white' },
+            'gray': { from: '#607D8B', to: '#90A4AE', text: 'white' },
+            'pink': { from: '#E91E63', to: '#F06292', text: 'white' },
+            'indigo': { from: '#3F51B5', to: '#7986CB', text: 'white' }
+        };
+
+        function renderSpecials() {
+            const container = document.getElementById('specialsList');
+            container.innerHTML = '';
+
+            specialCategories.forEach((special, index) => {
+                const gradient = colorGradients[special.color];
+                const specialHTML = `
+                    <div class="list-item" style="background: linear-gradient(135deg, ${gradient.from} 0%, ${gradient.to} 100%); color: ${gradient.text}; border: none; margin-bottom: 12px; position: relative;">
+                        <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                            <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                            <div style="font-size: 32px; margin-right: 12px;">${special.emoji}</div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 700; font-size: 16px;">${special.name}</div>
+                                <div style="font-size: 12px; opacity: 0.9;">${special.description}</div>
+                            </div>
+                            <div style="font-weight: 700; font-size: 18px; margin-right: 8px;">${special.value >= 0 ? '+' : ''}${special.value}</div>
+                        </label>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', specialHTML);
+            });
+        }
+
+        function addCustomSpecial() {
+            const name = document.getElementById('newSpecialName').value.trim();
+            const description = document.getElementById('newSpecialDescription').value.trim();
+            const emoji = document.getElementById('newSpecialEmoji').value.trim();
+            const value = parseInt(document.getElementById('newSpecialValue').value);
+            const color = document.getElementById('newSpecialColor').value;
+
+            // Validation
+            if (!name) {
+                alert('⚠️ Inserisci un nome per la categoria special');
+                return;
+            }
+            if (!description) {
+                alert('⚠️ Inserisci una descrizione');
+                return;
+            }
+            if (!emoji) {
+                alert('⚠️ Inserisci un emoji');
+                return;
+            }
+            if (isNaN(value)) {
+                alert('⚠️ Inserisci un valore numerico valido');
+                return;
+            }
+
+            // Add to array
+            specialCategories.push({
+                emoji: emoji,
+                name: name,
+                description: description,
+                value: value,
+                color: color
+            });
+
+            // Re-render
+            renderSpecials();
+
+            // Reset form
+            document.getElementById('newSpecialName').value = '';
+            document.getElementById('newSpecialDescription').value = '';
+            document.getElementById('newSpecialEmoji').value = '';
+            document.getElementById('newSpecialValue').value = '0';
+            document.getElementById('newSpecialColor').value = 'orange';
+
+            // Success feedback
+            alert('✅ Categoria Special aggiunta con successo!');
+        }
+
+        // Initialize specials on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            renderSpecials();
+        });
     </script>
 </body>
 </html>
