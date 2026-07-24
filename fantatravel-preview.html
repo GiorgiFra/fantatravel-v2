@@ -754,61 +754,122 @@
                 <div class="page-title">⚙️ Configura Regole</div>
             </div>
 
-            <div class="section">
-                <div class="section-title">🍜 Cibo & Bevande</div>
-                <div class="list-item">
-                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
-                        <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600;">K-BBQ Experience</div>
-                            <div style="font-size: 12px; color: #B2BAC2;">Completato un pasto BBQ coreano</div>
+            <!-- Form Nuova Regola -->
+            <div class="section" style="background: linear-gradient(135deg, #2C3038 0%, #1E2025 100%); border: 2px solid #FF6B35; padding: 20px; margin-bottom: 20px;">
+                <div class="section-title" style="color: #FF6B35;">➕ Aggiungi Regola Personalizzata</div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Descrizione</label>
+                    <input type="text" id="newRuleDescription" placeholder="Es: Beve birra locale" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                    <div>
+                        <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Categoria</label>
+                        <select id="newRuleCategory" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                            <option value="">Seleziona...</option>
+                            <option value="cibo">🍜 Cibo & Bevande</option>
+                            <option value="cultura">🎭 Cultura</option>
+                            <option value="attivita">🏃 Attività</option>
+                            <option value="social">📱 Social</option>
+                            <option value="altro">⭐ Altro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 13px; font-weight: 600; color: #B2BAC2; margin-bottom: 8px;">Punti (+ bonus, - malus)</label>
+                        <input type="number" id="newRuleValue" placeholder="Es: +5 o -3" value="0" style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #2C3038; background: #1E2025; color: white; font-size: 14px;">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="checkbox" id="newRuleRepeatable" style="width: 20px; height: 20px; margin-right: 12px;">
+                        <div>
+                            <div style="font-weight: 600; color: white;">Ripetibile</div>
+                            <div style="font-size: 12px; color: #B2BAC2;">Se spuntato: assegnabile 1 volta al giorno. Altrimenti: 1 sola volta in tutto il viaggio</div>
                         </div>
-                        <div style="color: #4CAF50; font-weight: 700;">+7</div>
                     </label>
                 </div>
-                <div class="list-item">
-                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
-                        <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600;">Bottiglia di Soju</div>
-                            <div style="font-size: 12px; color: #B2BAC2;">Finito una bottiglia intera</div>
-                        </div>
-                        <div style="color: #4CAF50; font-weight: 700;">+10</div>
-                    </label>
-                </div>
-                <div class="list-item">
-                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
-                        <input type="checkbox" style="width: 20px; height: 20px; margin-right: 12px;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600;">Bocca Bruciata</div>
-                            <div style="font-size: 12px; color: #B2BAC2;">Ustione al BBQ</div>
-                        </div>
-                        <div style="color: #F44336; font-weight: 700;">-5</div>
-                    </label>
-                </div>
+
+                <button class="btn" onclick="addCustomRule()" style="background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);">
+                    <span class="material-icons">add_circle</span>
+                    Aggiungi Regola
+                </button>
             </div>
 
+            <!-- Lista Regole Esistenti -->
             <div class="section">
-                <div class="section-title">🎭 Cultura</div>
-                <div class="list-item">
-                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
-                        <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600;">Hanbok Tradizionale</div>
-                            <div style="font-size: 12px; color: #B2BAC2;">Indossato per almeno 1 ora</div>
+                <div class="section-title">📋 Regole Attive</div>
+                <div style="font-size: 13px; color: #B2BAC2; margin-bottom: 16px;">Seleziona le regole da utilizzare in questo viaggio</div>
+
+                <div id="rulesList">
+                    <!-- Regole Cibo & Bevande -->
+                    <div style="background: #2C3038; padding: 12px; border-radius: 12px; margin-bottom: 8px;">
+                        <div style="font-size: 11px; color: #FF6B35; font-weight: 700; margin-bottom: 8px;">🍜 CIBO & BEVANDE</div>
+
+                        <div class="list-item" style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                                <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">K-BBQ Experience</div>
+                                    <div style="font-size: 11px; color: #B2BAC2;">Completato pasto BBQ coreano • Ripetibile ✓</div>
+                                </div>
+                                <div style="color: #4CAF50; font-weight: 700;">+7</div>
+                            </label>
                         </div>
-                        <div style="color: #4CAF50; font-weight: 700;">+10</div>
-                    </label>
-                </div>
-                <div class="list-item">
-                    <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
-                        <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600;">Selfie con K-pop Idol</div>
-                            <div style="font-size: 12px; color: #B2BAC2;">Foto con una star K-pop</div>
+
+                        <div class="list-item" style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                                <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Bottiglia di Soju</div>
+                                    <div style="font-size: 11px; color: #B2BAC2;">Finito bottiglia intera • Ripetibile ✓</div>
+                                </div>
+                                <div style="color: #4CAF50; font-weight: 700;">+10</div>
+                            </label>
                         </div>
-                        <div style="color: #4CAF50; font-weight: 700;">+20</div>
-                    </label>
+
+                        <div class="list-item">
+                            <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 12px;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Bocca Bruciata</div>
+                                    <div style="font-size: 11px; color: #B2BAC2;">Ustione al BBQ • Non ripetibile</div>
+                                </div>
+                                <div style="color: #F44336; font-weight: 700;">-5</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Regole Cultura -->
+                    <div style="background: #2C3038; padding: 12px; border-radius: 12px; margin-bottom: 8px;">
+                        <div style="font-size: 11px; color: #00A8E8; font-weight: 700; margin-bottom: 8px;">🎭 CULTURA</div>
+
+                        <div class="list-item" style="margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                                <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Hanbok Tradizionale</div>
+                                    <div style="font-size: 11px; color: #B2BAC2;">Indossato per 1+ ora • Non ripetibile</div>
+                                </div>
+                                <div style="color: #4CAF50; font-weight: 700;">+10</div>
+                            </label>
+                        </div>
+
+                        <div class="list-item">
+                            <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                                <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Selfie con K-pop Idol</div>
+                                    <div style="font-size: 11px; color: #B2BAC2;">Foto con star K-pop • Non ripetibile</div>
+                                </div>
+                                <div style="color: #4CAF50; font-weight: 700;">+20</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Regole Custom (vengono aggiunte qui dinamicamente) -->
+                    <div id="customRulesContainer"></div>
                 </div>
             </div>
 
@@ -1083,6 +1144,84 @@
 
         // Prevent pull-to-refresh
         document.body.style.overscrollBehavior = 'none';
+
+        // Add custom rule function
+        function addCustomRule() {
+            const description = document.getElementById('newRuleDescription').value.trim();
+            const category = document.getElementById('newRuleCategory').value;
+            const value = parseInt(document.getElementById('newRuleValue').value);
+            const repeatable = document.getElementById('newRuleRepeatable').checked;
+
+            // Validation
+            if (!description) {
+                alert('⚠️ Inserisci una descrizione per la regola');
+                return;
+            }
+            if (!category) {
+                alert('⚠️ Seleziona una categoria');
+                return;
+            }
+            if (isNaN(value)) {
+                alert('⚠️ Inserisci un valore numerico valido');
+                return;
+            }
+
+            // Category emoji map
+            const categoryEmoji = {
+                'cibo': '🍜',
+                'cultura': '🎭',
+                'attivita': '🏃',
+                'social': '📱',
+                'altro': '⭐'
+            };
+
+            const categoryName = {
+                'cibo': 'CIBO & BEVANDE',
+                'cultura': 'CULTURA',
+                'attivita': 'ATTIVITÀ',
+                'social': 'SOCIAL',
+                'altro': 'ALTRO'
+            };
+
+            const categoryColor = {
+                'cibo': '#FF6B35',
+                'cultura': '#00A8E8',
+                'attivita': '#4CAF50',
+                'social': '#9C27B0',
+                'altro': '#FFC107'
+            };
+
+            // Create rule HTML
+            const ruleHTML = `
+                <div style="background: #2C3038; padding: 12px; border-radius: 12px; margin-bottom: 8px;">
+                    <div style="font-size: 11px; color: ${categoryColor[category]}; font-weight: 700; margin-bottom: 8px;">
+                        ${categoryEmoji[category]} ${categoryName[category]} • CUSTOM
+                    </div>
+                    <div class="list-item">
+                        <label style="display: flex; align-items: center; width: 100%; cursor: pointer;">
+                            <input type="checkbox" checked style="width: 20px; height: 20px; margin-right: 12px;">
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600;">${description}</div>
+                                <div style="font-size: 11px; color: #B2BAC2;">Regola personalizzata • ${repeatable ? 'Ripetibile ✓' : 'Non ripetibile'}</div>
+                            </div>
+                            <div style="color: ${value >= 0 ? '#4CAF50' : '#F44336'}; font-weight: 700;">${value >= 0 ? '+' : ''}${value}</div>
+                        </label>
+                    </div>
+                </div>
+            `;
+
+            // Add to container
+            document.getElementById('customRulesContainer').insertAdjacentHTML('beforeend', ruleHTML);
+
+            // Reset form
+            document.getElementById('newRuleDescription').value = '';
+            document.getElementById('newRuleCategory').value = '';
+            document.getElementById('newRuleValue').value = '0';
+            document.getElementById('newRuleRepeatable').checked = false;
+
+            // Success feedback
+            alert('✅ Regola aggiunta con successo!');
+        }
     </script>
 </body>
 </html>
